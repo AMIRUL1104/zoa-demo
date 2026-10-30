@@ -1,0 +1,1352 @@
+<!doctype html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ZOA - Where Tradition Meets Modern Elegance</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Google Fonts: Hind Siliguri for Bengali typography & Playfair Display for accents -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              zoaPrimary: "#D91E73" /* Primary Magenta/Pink */,
+              zoaSecondary: "#1C4E3D" /* Forest Green Accent */,
+              zoaBg: "#FAFAFA" /* Off-White Background */,
+              zoaDark: "#222222" /* Neutral Dark Text */,
+              zoaLightAccent: "#FFF0F5",
+            },
+            fontFamily: {
+              sans: ["Hind Siliguri", "sans-serif"],
+              serif: ["Playfair Display", "serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        font-family: "Hind Siliguri", sans-serif;
+        background-color: #fafafa;
+        color: #222222;
+      }
+      /* Custom scrollbar for horizontal thumbnail carousel */
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      /* Smooth transitions */
+      .transition-all-custom {
+        transition: all 0.3s ease-in-out;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-zoaBg text-zoaDark antialiased min-h-screen flex flex-col justify-between"
+  >
+    <!-- 1. TOP ANNOUNCEMENT BAR -->
+    <div
+      class="bg-gradient-to-r from-zoaPrimary via-pink-600 to-zoaPrimary text-white text-xs md:text-sm py-2 px-4 text-center font-medium shadow-sm flex items-center justify-center gap-2"
+    >
+      <i class="fa-solid font-bold fa-truck-fast animate-bounce"></i>
+      <span>🚚 সারাদেশে ক্যাশ অন হোম ডেলিভারি সুবিধা! সীমিত স্টক উপলব্ধ।</span>
+    </div>
+
+    <!-- 2. HEADER SECTION -->
+    <header
+      class="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-sm border-b border-pink-100"
+    >
+      <div
+        class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between"
+      >
+        <!-- Left Side: Logo & Brand Name -->
+        <a href="#" class="flex items-center gap-2 group">
+          <div
+            class="w-10 h-10 rounded-full bg-zoaPrimary text-white flex items-center justify-center font-serif font-bold text-xl shadow-md group-hover:scale-105 transition-transform"
+          >
+            Z
+          </div>
+          <div class="flex flex-col">
+            <span
+              class="font-bold text-xl md:text-2xl tracking-wider text-zoaPrimary leading-none font-serif"
+              >ZOA</span
+            >
+            <span
+              class="text-[10px] text-gray-500 uppercase tracking-widest font-sans"
+              >Clothing Brand</span
+            >
+          </div>
+        </a>
+
+        <!-- Right Side: Order Now & Saved Orders Icon Button -->
+        <div class="flex items-center gap-3">
+          <a
+            href="#checkout-section"
+            class="hidden sm:inline-flex items-center justify-center bg-zoaPrimary hover:bg-pink-700 text-white font-medium text-sm px-4 py-2 rounded-full shadow-md transition-all duration-300"
+          >
+            <i class="fa-solid fa-bag-shopping mr-2"></i> অর্ডার করুন
+          </a>
+
+          <!-- Saved Orders Icon Button ONLY with Badge -->
+          <button
+            id="saved-orders-btn"
+            onclick="toggleOrdersModal()"
+            class="relative p-2.5 rounded-full bg-pink-50 hover:bg-pink-100 text-zoaPrimary transition-colors focus:outline-none"
+            title="সেভ করা অর্ডার সমূহ"
+          >
+            <i class="fa-solid fa-receipt text-xl"></i>
+            <span
+              id="saved-orders-badge"
+              class="absolute -top-1 -right-1 bg-zoaSecondary text-white text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white"
+            >
+              0
+            </span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow">
+      <!-- 3. HERO SECTION WITH ANIMATED CAROUSEL -->
+      <section class="max-w-6xl mx-auto px-4 py-6 md:py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <!-- Hero Image Showcase Carousel -->
+          <div
+            class="relative w-full max-w-md mx-auto lg:max-w-none rounded-2xl overflow-hidden shadow-2xl bg-white border border-pink-100"
+          >
+            <div class="relative aspect-square overflow-hidden bg-gray-100">
+              <img
+                id="hero-carousel-img"
+                src=""
+                alt="ZOA Product Showcase"
+                class="w-full h-full object-contain transition-opacity duration-500 fade-img"
+              />
+
+              <!-- Discount Tag Overlay -->
+              <div
+                class="absolute top-4 left-4 bg-zoaPrimary text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md uppercase tracking-wider"
+              >
+                ১১% ছাড়
+              </div>
+
+              <!-- Previous Button -->
+              <button
+                onclick="prevHeroSlide()"
+                class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 hover:bg-white text-zoaPrimary flex items-center justify-center shadow-lg transition-transform hover:scale-110 focus:outline-none"
+              >
+                <i class="fa-solid fa-chevron-left text-lg"></i>
+              </button>
+
+              <!-- Next Button -->
+              <button
+                onclick="nextHeroSlide()"
+                class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 hover:bg-white text-zoaPrimary flex items-center justify-center shadow-lg transition-transform hover:scale-110 focus:outline-none"
+              >
+                <i class="fa-solid fa-chevron-right text-lg"></i>
+              </button>
+
+              <!-- Carousel Indicators -->
+              <div
+                id="carousel-dots"
+                class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 px-3 py-1.5 bg-black/30 backdrop-blur-sm rounded-full"
+              >
+                <!-- JS dynamic dots -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Content Details -->
+          <div
+            class="flex flex-col text-center lg:text-left space-y-4 md:space-y-6"
+          >
+            <div
+              class="inline-flex items-center justify-center lg:justify-start gap-2 text-zoaSecondary font-medium text-sm md:text-base"
+            >
+              <span
+                class="w-2 h-2 rounded-full bg-zoaSecondary animate-ping"
+              ></span>
+              প্রিমিয়াম এসি/থাই কটন সামার কালেকশন
+            </div>
+
+            <h1
+              class="text-2xl md:text-4xl lg:text-5xl font-bold text-zoaDark leading-tight"
+            >
+              প্রিমিয়াম এসি/থাই কটন
+              <span class="text-zoaPrimary">গোল জামা থ্রি-পিস</span>
+            </h1>
+
+            <p class="text-gray-600 text-sm md:text-base leading-relaxed">
+              ✨ ZOA – Where tradition meets modern elegance 💫 গরমে ১০০% সুতি
+              কটন কাপড়ের সবচেয়ে আরামদায়ক গোল জামা কালেকশন। অফিস, বাসা, চেম্বার
+              কিংবা ইউনিভার্সিটির জন্য পারফেক্ট চয়েস!
+            </p>
+
+            <!-- Price Box -->
+            <div
+              class="p-4 rounded-xl bg-pink-50 border border-pink-100 flex items-center justify-center lg:justify-start gap-4"
+            >
+              <div class="flex flex-col">
+                <span class="text-xs text-gray-500 line-through"
+                  >রেগুলার মূল্য: ৳১,৭৫০</span
+                >
+                <div class="flex items-baseline gap-2">
+                  <span
+                    class="text-2xl md:text-3xl font-extrabold text-zoaPrimary"
+                    >৳১,৫৫০</span
+                  >
+                  <span class="text-xs text-zoaSecondary font-semibold"
+                    >(একদাম)</span
+                  >
+                </div>
+              </div>
+              <span
+                class="bg-zoaSecondary text-white text-xs px-3 py-1 rounded-md font-medium"
+                >ইন স্টক</span
+              >
+            </div>
+
+            <!-- Quick Spec Badges -->
+            <div
+              class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs md:text-sm text-gray-700"
+            >
+              <div
+                class="p-2.5 bg-white rounded-lg border border-gray-100 shadow-sm flex items-center justify-center lg:justify-start gap-2"
+              >
+                <i class="fa-solid fa-shirt text-zoaPrimary"></i> Long: 44"
+              </div>
+              <div
+                class="p-2.5 bg-white rounded-lg border border-gray-100 shadow-sm flex items-center justify-center lg:justify-start gap-2"
+              >
+                <i class="fa-solid fa-scissors text-zoaPrimary"></i> Pant: 39"
+              </div>
+              <div
+                class="p-2.5 bg-white rounded-lg border border-gray-100 shadow-sm flex items-center justify-center lg:justify-start gap-2 col-span-2 sm:col-span-1"
+              >
+                <i class="fa-solid fa-leaf text-zoaPrimary"></i> ওড়না: পিউর সুতি
+              </div>
+            </div>
+
+            <!-- CTA Button -->
+            <div class="pt-2">
+              <a
+                href="#checkout-section"
+                class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-zoaPrimary hover:bg-pink-700 text-white font-bold text-lg px-8 py-4 rounded-xl shadow-lg shadow-pink-200 transition-all hover:scale-105 active:scale-95"
+              >
+                <i class="fa-solid fa-cart-shopping"></i> সরাসরি অর্ডার করুন
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. KEY FEATURES & QUALITY HIGHLIGHTS -->
+      <section class="bg-white py-10 md:py-16 border-y border-gray-100">
+        <div class="max-w-6xl mx-auto px-4">
+          <div class="text-center max-w-xl mx-auto mb-10">
+            <h2 class="text-2xl md:text-3xl font-bold text-zoaDark">
+              কেন আমাদের প্রিমিয়াম এসি কটন বেছে নেবেন?
+            </h2>
+            <p class="text-gray-500 text-sm mt-2">
+              সেরা কোয়ালিটি ও আরামের ১০০% নিশ্চয়তা
+            </p>
+          </div>
+
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <!-- Feature 1 -->
+            <div
+              class="p-4 rounded-xl bg-zoaBg text-center border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div
+                class="w-12 h-12 mx-auto rounded-full bg-pink-100 text-zoaPrimary flex items-center justify-center text-xl mb-3"
+              >
+                <i class="fa-solid fa-temperature-arrow-down"></i>
+              </div>
+              <h3 class="font-bold text-sm text-gray-800">গরমে চরম আরাম</h3>
+              <p class="text-xs text-gray-500 mt-1">
+                ১০০% কটন যা শরীর ঠান্ডা রাখে
+              </p>
+            </div>
+
+            <!-- Feature 2 -->
+            <div
+              class="p-4 rounded-xl bg-zoaBg text-center border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div
+                class="w-12 h-12 mx-auto rounded-full bg-emerald-100 text-zoaSecondary flex items-center justify-center text-xl mb-3"
+              >
+                <i class="fa-solid fa-certificate"></i>
+              </div>
+              <h3 class="font-bold text-sm text-gray-800">
+                প্রিমিয়াম ফেব্রিক
+              </h3>
+              <p class="text-xs text-gray-500 mt-1">
+                উন্নত এসি/থাই কটনের লাস্ট আপডেট
+              </p>
+            </div>
+
+            <!-- Feature 3 -->
+            <div
+              class="p-4 rounded-xl bg-zoaBg text-center border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div
+                class="w-12 h-12 mx-auto rounded-full bg-pink-100 text-zoaPrimary flex items-center justify-center text-xl mb-3"
+              >
+                <i class="fa-solid fa-palette"></i>
+              </div>
+              <h3 class="font-bold text-sm text-gray-800">
+                পাকা কালার প্রিন্ট
+              </h3>
+              <p class="text-xs text-gray-500 mt-1">
+                কালার ও ডিজাইন দীর্ঘস্থায়ী
+              </p>
+            </div>
+
+            <!-- Feature 4 -->
+            <div
+              class="p-4 rounded-xl bg-zoaBg text-center border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div
+                class="w-12 h-12 mx-auto rounded-full bg-emerald-100 text-zoaSecondary flex items-center justify-center text-xl mb-3"
+              >
+                <i class="fa-solid fa-user-check"></i>
+              </div>
+              <h3 class="font-bold text-sm text-gray-800">পারফেক্ট ফিটিং</h3>
+              <p class="text-xs text-gray-500 mt-1">
+                ৩৬ থেকে ৪৮ পর্যন্ত অল সাইজ
+              </p>
+            </div>
+
+            <!-- Feature 5 -->
+            <div
+              class="p-4 rounded-xl bg-zoaBg text-center border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div
+                class="w-12 h-12 mx-auto rounded-full bg-pink-100 text-zoaPrimary flex items-center justify-center text-xl mb-3"
+              >
+                <i class="fa-solid fa-hand-holding-dollar"></i>
+              </div>
+              <h3 class="font-bold text-sm text-gray-800">ক্যাশ অন ডেলিভারি</h3>
+              <p class="text-xs text-gray-500 mt-1">
+                পণ্য হাতে পেয়ে মূল্য পরিশোধ
+              </p>
+            </div>
+
+            <!-- Feature 6 -->
+            <div
+              class="p-4 rounded-xl bg-zoaBg text-center border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div
+                class="w-12 h-12 mx-auto rounded-full bg-emerald-100 text-zoaSecondary flex items-center justify-center text-xl mb-3"
+              >
+                <i class="fa-solid fa-truck-ramp-box"></i>
+              </div>
+              <h3 class="font-bold text-sm text-gray-800">দ্রুত ডেলিভারি</h3>
+              <p class="text-xs text-gray-500 mt-1">
+                সারাদেশে ৩-৫ দিনে হোম ডেলিভারি
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. SIZE CHART & GUIDE SECTION -->
+      <section class="max-w-4xl mx-auto px-4 py-10 md:py-16">
+        <div
+          class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 md:p-8"
+        >
+          <div class="text-center mb-6">
+            <span
+              class="text-zoaPrimary font-bold text-sm tracking-wider uppercase"
+              >Size Measurement</span
+            >
+            <h2 class="text-2xl font-bold text-zoaDark mt-1">
+              সাইজ গাইড ও পরিমাপের চার্ট
+            </h2>
+            <p class="text-xs text-gray-500 mt-1">
+              অর্ডার করার পূর্বে আপনার সঠিক সাইজটি মিলিয়ে নিন
+            </p>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm text-center border-collapse">
+              <thead>
+                <tr
+                  class="bg-pink-50 text-zoaPrimary font-bold border-b border-pink-200"
+                >
+                  <th class="p-3">সাইজ (Size)</th>
+                  <th class="p-3">বুক/চেস্ট (Chest)</th>
+                  <th class="p-3">জামা লম্বা (Kamiz Length)</th>
+                  <th class="p-3">প্যান্ট লম্বা (Pant Length)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-100 text-gray-700">
+                <tr class="hover:bg-gray-50">
+                  <td class="p-3 font-semibold text-zoaSecondary">36</td>
+                  <td class="p-3">৩৬ ইঞ্চি</td>
+                  <td class="p-3">৪৪ ইঞ্চি</td>
+                  <td class="p-3">৩৯ ইঞ্চি</td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="p-3 font-semibold text-zoaSecondary">38</td>
+                  <td class="p-3">৩৮ ইঞ্চি</td>
+                  <td class="p-3">৪৪ ইঞ্চি</td>
+                  <td class="p-3">৩৯ ইঞ্চি</td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="p-3 font-semibold text-zoaSecondary">40</td>
+                  <td class="p-3">৪০ ইঞ্চি</td>
+                  <td class="p-3">৪৪ ইঞ্চি</td>
+                  <td class="p-3">৩৯ ইঞ্চি</td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="p-3 font-semibold text-zoaSecondary">42</td>
+                  <td class="p-3">৪২ ইঞ্চি</td>
+                  <td class="p-3">৪৪ ইঞ্চি</td>
+                  <td class="p-3">৩৯ ইঞ্চি</td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="p-3 font-semibold text-zoaSecondary">44</td>
+                  <td class="p-3">৪৪ ইঞ্চি</td>
+                  <td class="p-3">৪৪ ইঞ্চি</td>
+                  <td class="p-3">৩৯ ইঞ্চি</td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="p-3 font-semibold text-zoaSecondary">46</td>
+                  <td class="p-3">৪৬ ইঞ্চি</td>
+                  <td class="p-3">৪৪ ইঞ্চি</td>
+                  <td class="p-3">৩৯ ইঞ্চি</td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="p-3 font-semibold text-zoaSecondary">48</td>
+                  <td class="p-3">৪৮ ইঞ্চি</td>
+                  <td class="p-3">৪৪ ইঞ্চি</td>
+                  <td class="p-3">৩৯ ইঞ্চি</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div
+            class="mt-4 p-3 bg-emerald-50 text-zoaSecondary text-xs rounded-lg flex items-center gap-2"
+          >
+            <i class="fa-solid fa-circle-info text-base"></i>
+            <span
+              >বিঃদ্রঃ আপনার সাধারণ মাপের সাথে মিলিয়ে সঠিক সাইজ নির্বাচন
+              করুন।</span
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. CHECKOUT / ORDER FORM SECTION -->
+      <section
+        id="checkout-section"
+        class="max-w-5xl mx-auto px-4 py-10 md:py-16"
+      >
+        <div
+          class="bg-white rounded-2xl shadow-xl border border-pink-100 overflow-hidden"
+        >
+          <!-- Section Header -->
+          <div
+            class="bg-gradient-to-r from-zoaPrimary to-pink-700 text-white p-6 text-center"
+          >
+            <h2 class="text-2xl md:text-3xl font-bold">
+              অর্ডার ফর্ম (Order Form)
+            </h2>
+            <p class="text-xs md:text-sm text-pink-100 mt-1">
+              পছন্দের ভ্যারিয়েন্ট ও সাইজ সিলেক্ট করে কাস্টমার তথ্য পূরণ করুন
+            </p>
+          </div>
+
+          <form
+            id="checkout-form"
+            onsubmit="handleOrderSubmit(event)"
+            class="p-4 md:p-8 space-y-8"
+          >
+            <!-- STEP 1: Multi-Item Carousel Selector with Quantity -->
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <label
+                  class="block font-bold text-gray-800 text-base md:text-lg"
+                >
+                  ১. ডিজাইন/ভ্যারিয়েন্ট বাছাই করুন (মাল্টি-সিলেকশন):
+                </label>
+                <span
+                  class="text-xs text-zoaPrimary bg-pink-50 px-2.5 py-1 rounded-full font-semibold"
+                >
+                  একাধিক পোশাক একসাথে বেছে নিন
+                </span>
+              </div>
+
+              <!-- Horizontal Scroll Carousel for Thumbnails -->
+              <!-- Added 'overflow-visible' to allow scroll buttons to work properly -->
+              <div class="relative group" id="variant-scroll-container">
+                <!-- Left Scroll Arrow Button -->
+                <button
+                  type="button"
+                  onclick="scrollVariantGallery(-1)"
+                  class="absolute -left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-zoaSecondary hover:text-white border border-gray-200 text-zoaSecondary w-9 h-9 rounded-full shadow-md flex items-center justify-center transition z-20 focus:outline-none"
+                >
+                  <i class="fa-solid fa-chevron-left"></i>
+                </button>
+
+                <div
+                  id="variants-container"
+                  class="flex gap-4 overflow-x-auto pb-4 pt-1 no-scrollbar scroll-smooth snap-x"
+                >
+                  <!-- JS Populated Variant Thumbnail Cards -->
+                </div>
+
+                <!-- Right Scroll Arrow Button -->
+                <button
+                  type="button"
+                  onclick="scrollVariantGallery(1)"
+                  class="absolute -right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-zoaSecondary hover:text-white border border-gray-200 text-zoaSecondary w-9 h-9 rounded-full shadow-md flex items-center justify-center transition z-20 focus:outline-none"
+                >
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- STEP 2: Selected Items Summary & Size Options -->
+            <div
+              class="bg-gray-50 p-4 md:p-6 rounded-xl border border-gray-200"
+            >
+              <h3
+                class="font-bold text-gray-800 mb-3 text-base flex items-center gap-2"
+              >
+                <i class="fa-solid fa-list-check text-zoaPrimary"></i> ২.
+                নির্বাচিত আইটেম ও সাইজ নির্ধারণ:
+              </h3>
+
+              <div id="selected-variants-summary" class="space-y-3">
+                <!-- JS populated summary list of selected items with size dropdowns -->
+              </div>
+            </div>
+
+            <!-- STEP 3: Customer Details Form -->
+            <div class="space-y-4">
+              <h3
+                class="font-bold text-gray-800 text-base md:text-lg border-b pb-2 flex items-center gap-2"
+              >
+                <i class="fa-solid fa-user text-zoaPrimary"></i> ৩. আপনার
+                ডেলিভারি ইনফরমেশন লিখুন:
+              </h3>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Name Input -->
+                <div>
+                  <label class="block text-xs font-semibold text-gray-700 mb-1"
+                    >আপনার নাম *</label
+                  >
+                  <input
+                    type="text"
+                    id="customer-name"
+                    required
+                    placeholder="উদাহরণ: মোসাম্মাৎ শরিফা বেগম"
+                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-zoaPrimary focus:outline-none text-sm"
+                  />
+                </div>
+
+                <!-- Phone Input -->
+                <div>
+                  <label class="block text-xs font-semibold text-gray-700 mb-1"
+                    >মোবাইল নম্বর *</label
+                  >
+                  <input
+                    type="tel"
+                    id="customer-phone"
+                    required
+                    pattern="[0-9]{11}"
+                    placeholder="উদাহরণ: 01700000000"
+                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-zoaPrimary focus:outline-none text-sm"
+                  />
+                </div>
+
+                <!-- District Searchable/Dropdown Select -->
+                <div>
+                  <label class="block text-xs font-semibold text-gray-700 mb-1"
+                    >জেলা নির্বাচন করুন *</label
+                  >
+                  <select
+                    id="customer-district"
+                    onchange="calculateTotal()"
+                    required
+                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-zoaPrimary focus:outline-none text-sm bg-white"
+                  >
+                    <option value="">জেলা নির্বাচন করুন</option>
+                    <option value="Dhaka">ঢাকা (Dhaka)</option>
+                    <option value="Chittagong">চট্টগ্রাম (Chittagong)</option>
+                    <option value="Rajshahi">রাজশাহী (Rajshahi)</option>
+                    <option value="Khulna">খুলনা (Khulna)</option>
+                    <option value="Barisal">বরিশাল (Barisal)</option>
+                    <option value="Sylhet">সিলেট (Sylhet)</option>
+                    <option value="Rangpur">রংপুর (Rangpur)</option>
+                    <option value="Mymensingh">ময়মনসিংহ (Mymensingh)</option>
+                    <option value="Comilla">কুমিল্লা (Comilla)</option>
+                    <option value="Gazipur">গাজীপুর (Gazipur)</option>
+                    <option value="Narayanganj">
+                      নারায়ণগঞ্জ (Narayanganj)
+                    </option>
+                    <option value="Jessore">যশোর (Jessore)</option>
+                    <option value="Other">
+                      অন্যান্য জেলা (Other District)
+                    </option>
+                  </select>
+                </div>
+
+                <!-- Full Address -->
+                <div>
+                  <label class="block text-xs font-semibold text-gray-700 mb-1"
+                    >সুনির্দিষ্ট ঠিকানা (বাসা/রোড/এলাকা) *</label
+                  >
+                  <input
+                    type="text"
+                    id="customer-address"
+                    required
+                    placeholder="উদাহরণ: বাসা নং ১০, রোড ৫, মিরপুর-১০"
+                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-zoaPrimary focus:outline-none text-sm"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 4: Live Price Calculation Order Summary -->
+            <div
+              class="p-4 md:p-6 bg-pink-50/50 rounded-xl border border-pink-100 space-y-3"
+            >
+              <h4
+                class="font-bold text-zoaDark text-base border-b border-pink-200 pb-2"
+              >
+                অর্ডার সামারি
+              </h4>
+
+              <div class="flex justify-between text-sm text-gray-600">
+                <span
+                  >পণ্যের সাবটোটাল (<span id="summary-total-qty">0</span>
+                  টি):</span
+                >
+                <span class="font-semibold text-gray-800" id="summary-subtotal"
+                  >৳০</span
+                >
+              </div>
+
+              <div class="flex justify-between text-sm text-gray-600">
+                <span>ডেলিভারি চার্জ:</span>
+                <span
+                  class="font-semibold text-zoaSecondary"
+                  id="summary-delivery"
+                  >৳০</span
+                >
+              </div>
+
+              <div
+                class="flex justify-between text-lg font-bold text-zoaDark border-t border-pink-200 pt-3"
+              >
+                <span>সর্বমোট প্রদেয় মূল্য:</span>
+                <span class="text-zoaPrimary text-2xl" id="summary-grand-total"
+                  >৳০</span
+                >
+              </div>
+
+              <div class="text-xs text-gray-500 flex items-center gap-2 pt-1">
+                <i class="fa-solid fa-shield-halved text-zoaSecondary"></i>
+                ক্যাশ অন ডেলিভারি - পণ্য বুঝে পেয়ে মূল্য পরিশোধ করুন।
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button
+              type="submit"
+              class="w-full bg-zoaPrimary hover:bg-pink-700 text-white font-bold text-lg py-4 rounded-xl shadow-lg shadow-pink-200 transition-all hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-2"
+            >
+              <i class="fa-solid fa-paper-plane"></i> কনফার্ম অর্ডার করুন
+              (৳<span id="btn-total-price">০</span>)
+            </button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- 7. FOOTER SECTION -->
+    <footer class="bg-zoaDark text-white pt-12 pb-8 border-t border-gray-800">
+      <div
+        class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-gray-800"
+      >
+        <!-- Brand Info -->
+        <div class="space-y-3">
+          <div class="flex items-center gap-2">
+            <div
+              class="w-8 h-8 rounded-full bg-zoaPrimary text-white flex items-center justify-center font-serif font-bold text-lg"
+            >
+              Z
+            </div>
+            <span
+              class="font-bold text-2xl text-white font-serif tracking-wider"
+              >ZOA</span
+            >
+          </div>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            ✨ ZOA – Where tradition meets modern elegance 💫 Embrace
+            confidence, culture & creativity with every stitch. Fashion that
+            tells your story, crafted with love & timeless style. 💕
+          </p>
+        </div>
+
+        <!-- Quick Contact -->
+        <div class="space-y-3">
+          <h4
+            class="font-bold text-zoaPrimary text-sm uppercase tracking-wider"
+          >
+            যোগাযোগের তথ্য
+          </h4>
+          <ul class="text-xs text-gray-300 space-y-2">
+            <li class="flex items-start gap-2">
+              <i class="fa-solid fa-location-dot mt-0.5 text-zoaPrimary"></i>
+              <span
+                >1/31 Estren Mollica Shopping Complex, Dhaka, Bangladesh,
+                1000</span
+              >
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="fa-solid fa-phone text-zoaPrimary"></i>
+              <span>01786-489815, +880 1786-489815</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="fa-solid fa-envelope text-zoaPrimary"></i>
+              <span>info.zoabd@gmail.com</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Delivery & Social -->
+        <div class="space-y-3">
+          <h4
+            class="font-bold text-zoaPrimary text-sm uppercase tracking-wider"
+          >
+            সোশ্যাল মিডিয়া ও সাপোর্ট
+          </h4>
+          <p class="text-xs text-gray-400">আমাদের পেজে ফলো দিয়ে সাথেই থাকুন</p>
+          <div class="flex gap-3">
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              class="w-9 h-9 rounded-full bg-gray-800 hover:bg-zoaPrimary text-white flex items-center justify-center transition-colors"
+            >
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              class="w-9 h-9 rounded-full bg-gray-800 hover:bg-zoaPrimary text-white flex items-center justify-center transition-colors"
+            >
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a
+              href="https://wa.me/8801786489815"
+              target="_blank"
+              class="w-9 h-9 rounded-full bg-gray-800 hover:bg-zoaSecondary text-white flex items-center justify-center transition-colors"
+            >
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="max-w-6xl mx-auto px-4 pt-6 text-center text-xs text-gray-500"
+      >
+        &copy; 2026 ZOA Clothing Brand. All Rights Reserved. Designed for
+        Elegant Lifestyle.
+      </div>
+    </footer>
+
+    <!-- SAVED ORDERS MODAL (POPUP) -->
+    <div
+      id="orders-modal"
+      class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4"
+    >
+      <div
+        class="bg-white rounded-2xl max-w-lg w-full max-h-[80vh] flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200"
+      >
+        <!-- Modal Header -->
+        <div
+          class="p-4 bg-zoaPrimary text-white flex items-center justify-between"
+        >
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-receipt text-lg"></i>
+            <h3 class="font-bold text-lg">সেভ করা অর্ডার সমূহ</h3>
+          </div>
+          <button
+            onclick="toggleOrdersModal()"
+            class="text-white hover:text-pink-200 text-xl font-bold p-1"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <!-- Modal Content List -->
+        <div
+          id="modal-orders-list"
+          class="p-4 overflow-y-auto space-y-4 flex-grow text-xs md:text-sm"
+        >
+          <!-- JS Inserted Orders -->
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="p-3 bg-gray-50 border-t border-gray-100 text-right">
+          <button
+            onclick="toggleOrdersModal()"
+            class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold rounded-lg text-xs"
+          >
+            বন্ধ করুন
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+      // -------------------------------------------------------------
+      // DATA SET: Product Variants & CDN Images
+      // -------------------------------------------------------------
+      const PRODUCT_PRICE = 1550; // Offer Price in BDT
+      const REGULAR_PRICE = 1750;
+
+      // Helper to get high-quality hero image URL (remove thumbnail crop parameter)
+      function getHeroImageUrl(thumbUrl) {
+        return thumbUrl
+          .replace(/&ctp=s\d+x\d+/, "")
+          .replace(/\?ctp=s\d+x\d+/, "?");
+      }
+
+      const variants = [
+        {
+          id: 1,
+          name: "Variant 1 - Deep Green",
+          img: "https://scontent.fdac27-1.fna.fbcdn.net/v/t39.99422-6/870397565_4422886524688796_1158915201878002658_n.png?stp=c0.118.1080.1080a_dst-jpg_tt6&cstp=mx1080x1080&ctp=s206x206&_nc_cat=100&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=50ad20&_nc_eui2=AeEMwIg9CNojQviWLNfvKOP16_ajCeDu4rrr9qMJ4O7iuv41SGtoVWZyOpJSRazt0Q7pTE5x7DPnoe8V2M0rx2eD&_nc_oc=Adpe1u3IAhrg2Adum8mQrrdUtGVe76VTC7sser3l8yt8oJzJnYDSp75ftR3JZkx1Orc&_nc_zt=14&_nc_ht=scontent.fdac27-1.fna&_nc_gid=68Sps-CCaZHy1oK_JSjDGQ&_nc_ss=7b2a8&oh=00_AQR9WvywJoeS0cSOttgd9e-BACPejjAL0Uxb0QpjojEHag&oe=6AE97087",
+        },
+        {
+          id: 2,
+          name: "Variant 2 - Floral Pastel",
+          img: "https://scontent.fdac27-1.fna.fbcdn.net/v/t39.99422-6/866079778_1104566621979616_5003984842302625152_n.png?stp=c0.118.1080.1080a_dst-jpg_tt6&cstp=mx1080x1080&ctp=s206x206&_nc_cat=103&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=50ad20&_nc_eui2=AeF0-HbWpROxxb6UbSX2QEgyRz8r7VFqUNhHPyvtUWpQ2DhXV8rofin9wJZrXt83vqSU5Uv_i17xfPolQ2DDtyOX&_nc_ohc=Y7SumhsIf-gQ7kNvwG0Z1IR&_nc_oc=Adp0BAV8k4tWCEfaZbCbbKFJS6tHu2_X3PRIe4MjwoH15qWCKKg2H5Dja_ZALBZS4yQ&_nc_zt=14&_nc_ht=scontent.fdac27-1.fna&_nc_gid=68Sps-CCaZHy1oK_JSjDGQ&_nc_ss=7b2a8&oh=00_AQSW54RGWuurQ9cOVOIVzQenoh3lTQNH4NLOYUFxRSQSIg&oe=6AE97A5E",
+        },
+        {
+          id: 3,
+          name: "Variant 3 - Soft Pink",
+          img: "https://scontent.fdac27-1.fna.fbcdn.net/v/t39.99422-6/867970341_2334603777287560_486327123068988227_n.png?stp=c0.118.1080.1080a_dst-jpg_tt6&cstp=mx1080x1080&ctp=s206x206&_nc_cat=103&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=50ad20&_nc_eui2=AeGe5yRmCHxcnk52Tn1J6-At_pVOcAuAhmb-lU5wC4CGZsi2qmzVHCOv5XES0H5eT4MzixK7cZnSLJTTTmsAmvbT&_nc_ohc=gNVQJUEso8oQ7kNvwEQnoEm&_nc_oc=Ado81EBLJlLXIprUU71n1wp8s4z1fXBHEFaQy1gJVAQhely0FcT789NVMYLzy8_TOfg&_nc_zt=14&_nc_ht=scontent.fdac27-1.fna&_nc_gid=68Sps-CCaZHy1oK_JSjDGQ&_nc_ss=7b2a8&oh=00_AQQVqshfsWWZBW2pQ2pC8D0jC2f-lCJgSaQua3Fuazgfog&oe=6AE95525",
+        },
+        {
+          id: 4,
+          name: "Variant 4 - Royal Pattern",
+          img: "https://scontent.fdac27-1.fna.fbcdn.net/v/t39.99422-6/867793993_1096176573207337_5350571824852533757_n.png?stp=c0.118.1080.1080a_dst-jpg_tt6&cstp=mx1080x1080&ctp=s206x206&_nc_cat=102&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=50ad20&_nc_eui2=AeFSD1GNdWWqTSm29OMrlXhnVA2QCNcEWXdUDZAI1wRZdyzPi2fvTKYtLD69ZFckiCNJ_sXFHgiR2QKncX2HjsGE&_nc_ohc=D2xdOP_elCoQ7kNvwHVM2WB&_nc_oc=Adr1n1ijC8SrpJURNK2ne-wRh4d2l1IoKVqrcrqdwzTsVyUc8NUUlR073Z1bJvDTbWM&_nc_zt=14&_nc_ht=scontent.fdac27-1.fna&_nc_gid=68Sps-CCaZHy1oK_JSjDGQ&_nc_ss=7b2a8&oh=00_AQR1lDl4aprCrvrjlm0Vy9A4euq4dBHTpv8iqXB10oF1vA&oe=6AE988A5",
+        },
+        {
+          id: 5,
+          name: "Variant 5 - Elegant Blue",
+          img: "https://scontent.fdac27-1.fna.fbcdn.net/v/t39.99422-6/870975007_1149442657428826_6894845292585012061_n.png?stp=c0.118.1080.1080a_dst-jpg_tt6&cstp=mx1080x1080&ctp=s206x206&_nc_cat=106&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=50ad20&_nc_eui2=AeExng08FPY4QsEBJ7WJ0DCzAJ4ZUBa3rbUAnhlQFrettV3So_Tcc_TpGb97XypCCSDVuFUnkvSjyxc8LFuJU91X&_nc_ohc=6MYGBIR8Bv0Q7kNvwGndD0z&_nc_oc=AdrQJcHxhL3-PRRiQXUDVcIZiBKcu9u5C8UdOmp8Pi5jneLPlYXHEm10b6_6mjP1Wqc&_nc_zt=14&_nc_ht=scontent.fdac27-1.fna&_nc_gid=68Sps-CCaZHy1oK_JSjDGQ&_nc_ss=7b2a8&oh=00_AQQlQ1iBcIXpcGgWg7bI2VVdo2l0J_tFHLA0RfacQN3qzQ&oe=6AE97641",
+        },
+        {
+          id: 6,
+          name: "Variant 6 - Classic Navy",
+          img: "https://scontent.fdac27-1.fna.fbcdn.net/v/t39.99422-6/870640617_937797275856682_1648750762842851824_n.png?stp=c0.118.1080.1080a_dst-jpg_tt6&cstp=mx1080x1080&ctp=s206x206&_nc_cat=103&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=50ad20&_nc_eui2=AeEY-cmrZOMbDRGlRDgdvPzxDgzPy_KOy_EODM_L8o7L8XxSLZe3zGzCKsbmOXyIERiekZVHCi5zLtIa3NCbjFe5&_nc_ohc=rTDqBy9MJgMQ7kNvwF6hbYt&_nc_oc=AdovndKm2Vs7l6U63UxVHBJjstAkormXKq-zlHmlCTjyenX2_lwVEB5sCMa_xEXb0fY&_nc_zt=14&_nc_ht=scontent.fdac27-1.fna&_nc_gid=68Sps-CCaZHy1oK_JSjDGQ&_nc_ss=7b2a8&oh=00_AQRDxrsZwSgkrPCQQC81-KHnrUzRLUud0WnbPl64ZHmpNA&oe=6AE973C5",
+        },
+        {
+          id: 7,
+          name: "Variant 7 - Traditional Maroon",
+          img: "https://scontent.fdac27-1.fna.fbcdn.net/v/t39.99422-6/872851351_28110248521981218_3486493915945673269_n.png?stp=c0.118.1080.1080a_dst-jpg_tt6&cstp=mx1080x1080&ctp=s206x206&_nc_cat=105&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=50ad20&_nc_eui2=AeHqpHVddDfNSuruRWT4g12K-Qsk6FEXDQn5CyToURcNCan3FyXe8c_gbbdWou44wTo9EI9-WTFZ_nve6gfkcrSs&_nc_ohc=EC3CzmNUF1sQ7kNvwEWRk3H&_nc_oc=AdpHBgbUXgVYgcO0p3syPJeszORj8xcfRukCevua5xBUFuI1PWWpmOCaCAJuZepRrPk&_nc_zt=14&_nc_ht=scontent.fdac27-1.fna&_nc_gid=hCJGfkZVpnb-BvW1yMdtSA&_nc_ss=7b2a8&oh=00_AQRHTiYdUjORce_CbHSFbPTPfSkzq5iTzo3w0c6JpPN4tQ&oe=6AE95C73",
+        },
+        {
+          id: 8,
+          name: "Variant 8 - Emerald Chic",
+          img: "https://scontent.fdac27-1.fna.fbcdn.net/v/t39.99422-6/865314770_28657332560554796_2882603205338770971_n.png?stp=c0.118.1080.1080a_dst-jpg_tt6&cstp=mx1080x1080&ctp=s206x206&_nc_cat=101&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=50ad20&_nc_eui2=AeE531THdlstZg7bCOq9tcg39X34hgaMSMH1ffiGBoxIwex2K_Vkn-RJLpVkFTil0oloQ4fMsepjCgjAhtNOqFK3&_nc_ohc=Uj_FbEpsdowQ7kNvwEzuAl3&_nc_oc=AdquHM77BUx2fI1C1vFdb-nHG9Zd5LHKJkr5beBqmeRuCcAN-nUoXZHuy6qmWbCCp7k&_nc_zt=14&_nc_ht=scontent.fdac27-1.fna&_nc_gid=hCJGfkZVpnb-BvW1yMdtSA&_nc_ss=7b2a8&oh=00_AQRhTaB1nqiPMlOipJOjpbWJNyPg0Qvn1zuwpGzwGCa0Gg&oe=6AE95FC4",
+        },
+        {
+          id: 9,
+          name: "Variant 9 - Purple Delight",
+          img: "https://scontent.fdac27-1.fna.fbcdn.net/v/t39.99422-6/862511480_1487015163302847_8874569135149797344_n.png?stp=c0.118.1080.1080a_dst-jpg_tt6&cstp=mx1080x1080&ctp=s206x206&_nc_cat=111&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=50ad20&_nc_eui2=AeF0Qzag6nX-nQ3ykhBiiuaFgocnAfMdAIWChycB8x0AhQjLO7qQWWQOHaiJIMujZhiXcHDsWdiuSE6rveJa80DH&_nc_ohc=9XVB46oRGUwQ7kNvwG-jL2E&_nc_oc=AdpZRhRuOtTWXRmsyRXQvQySJz8Ue9p_DqUjGQY2YHXTKI78MK2jZS01kDn7y2hChn8&_nc_zt=14&_nc_ht=scontent.fdac27-1.fna&_nc_gid=hCJGfkZVpnb-BvW1yMdtSA&_nc_ss=7b2a8&oh=00_AQQSGO2eTnnD-5xX4_XDlHGzH3H_zePzC-QJx6ZB1RuFGQ&oe=6AE9625B",
+        },
+        {
+          id: 10,
+          name: "Variant 10 - Vintage Olive",
+          img: "https://scontent.fdac27-1.fna.fbcdn.net/v/t39.99422-6/875352206_1034241909680233_588332292470700486_n.png?stp=c0.118.1080.1080a_dst-jpg_tt6&cstp=mx1080x1080&ctp=s206x206&_nc_cat=106&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=50ad20&_nc_eui2=AeGzky89Ubvg89c14XIBI0TxHmAaKYGlA6UeYBopgaUDpSF-lNIW_LYKyOC89H0zZWUjGO7dqfmFy4Mq2wkaEb65&_nc_ohc=80qjF9C-mcQQ7kNvwHQ_ITC&_nc_oc=AdpY94r0gB6gvPAMOv-T9-Z8OikboK6yofLb2w0ogN9OghdR0owZnOnzEHlBaG3bpfI&_nc_zt=14&_nc_ht=scontent.fdac27-1.fna&_nc_gid=hCJGfkZVpnb-BvW1yMdtSA&_nc_ss=7b2a8&oh=00_AQTj6qGzWkLyJ6f_nxffpHw2tkJR-vThAB7SZ7p4DEso7w&oe=6AE98683",
+        },
+        {
+          id: 11,
+          name: "Variant 11 - Bright Magenta",
+          img: "https://scontent.fdac27-1.fna.fbcdn.net/v/t39.99422-6/867547145_1087235827419194_2247235624802385098_n.png?stp=c0.118.1080.1080a_dst-jpg_tt6&cstp=mx1080x1080&ctp=s206x206&_nc_cat=100&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=50ad20&_nc_eui2=AeGaOP3_S5OwXXZ19s0st_7d2Gr-PkKjBTPYav4-QqMFM6DgA2QO1ETdwjQ5MJjV090sdlPwFP21eKZdFxq0d3I0&_nc_ohc=HreNQNzEbS4Q7kNvwHr8N25&_nc_oc=Adodzxl1YIoJI7dpbgM_dukRrwiYmgAuF-IapESTrhEtmp0c7dtEclQFhMVlrYOnkiI&_nc_zt=14&_nc_ht=scontent.fdac27-1.fna&_nc_gid=68Sps-CCaZHy1oK_JSjDGQ&_nc_ss=7b2a8&oh=00_AQQ6WjKprTEltYkndeNBRoBj4yBfM1PmDckVzfn_d1jAzw&oe=6AE967C7",
+        },
+        {
+          id: 12,
+          name: "Variant 12 - Deep Teal",
+          img: "https://scontent.fdac27-1.fna.fbcdn.net/v/t39.99422-6/866770653_1561113462491749_798991045791846353_n.png?stp=c0.118.1080.1080a_dst-jpg_tt6&cstp=mx1080x1080&ctp=s206x206&_nc_cat=103&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=50ad20&_nc_eui2=AeElV1SdYHBTeL7K_V4BCGl5tef-cukLIhC15_5y6QsiENAB5HFVcH1e0PZ8-nH759m6hIg9Bs5bkad_5Dsls1xP&_nc_ohc=xWWoFhrpdQMQ7kNvwHkdnk2&_nc_oc=Adozqcbb-qrKqAPJDupsqmFzW7QvefoziPdNf4vxeF50LEY3DoWV8NekDFbklkz_kak&_nc_zt=14&_nc_ht=scontent.fdac27-1.fna&_nc_gid=68Sps-CCaZHy1oK_JSjDGQ&_nc_ss=7b2a8&oh=00_AQSVdjR_BsBekVdgbIAHYNuDDCK51S-siUXwYzOJ0riXqw&oe=6AE984A3",
+        },
+      ];
+
+      // High-quality images for hero carousel (without thumbnail crop)
+      const heroImages = variants.map((v) => getHeroImageUrl(v.img));
+
+      const sizes = ["36", "38", "40", "42", "44", "46", "48"];
+
+      // State variables
+      let heroIndex = 0;
+      let heroInterval = null;
+
+      // Selected Items state object: { variantId: { selected: true/false, quantity: 1, size: "38" } }
+      let selectedState = {};
+
+      // Initialize state
+      variants.forEach((v) => {
+        selectedState[v.id] = {
+          selected: v.id === 1, // default select first variant
+          quantity: 1,
+          size: "38", // default size
+        };
+      });
+
+      // -------------------------------------------------------------
+      // HERO CAROUSEL LOGIC
+      // -------------------------------------------------------------
+      function initHeroCarousel() {
+        const imgEl = document.getElementById("hero-carousel-img");
+        const dotsEl = document.getElementById("carousel-dots");
+
+        // Render Dots
+        dotsEl.innerHTML = variants
+          .map(
+            (_, i) => `
+                <button onclick="goToHeroSlide(${i})" class="w-2 h-2 rounded-full transition-all ${i === 0 ? "bg-white w-5" : "bg-white/50"}"></button>
+            `,
+          )
+          .join("");
+
+        updateHeroSlide();
+
+        // Auto slide every 5 seconds
+        startHeroTimer();
+      }
+
+      function updateHeroSlide() {
+        const imgEl = document.getElementById("hero-carousel-img");
+        const dots = document.getElementById("carousel-dots").children;
+
+        imgEl.style.opacity = "0.3";
+        setTimeout(() => {
+          imgEl.src = heroImages[heroIndex];
+          imgEl.style.opacity = "1";
+        }, 150);
+
+        // Update dot indicators
+        for (let i = 0; i < dots.length; i++) {
+          if (i === heroIndex) {
+            dots[i].className = "w-5 h-2 rounded-full bg-white transition-all";
+          } else {
+            dots[i].className =
+              "w-2 h-2 rounded-full bg-white/50 transition-all";
+          }
+        }
+      }
+
+      function nextHeroSlide() {
+        heroIndex = (heroIndex + 1) % variants.length;
+        updateHeroSlide();
+        resetHeroTimer();
+      }
+
+      function prevHeroSlide() {
+        heroIndex = (heroIndex - 1 + variants.length) % variants.length;
+        updateHeroSlide();
+        resetHeroTimer();
+      }
+
+      function goToHeroSlide(index) {
+        heroIndex = index;
+        updateHeroSlide();
+        resetHeroTimer();
+      }
+
+      function startHeroTimer() {
+        heroInterval = setInterval(() => {
+          heroIndex = (heroIndex + 1) % variants.length;
+          updateHeroSlide();
+        }, 5000);
+      }
+
+      function resetHeroTimer() {
+        clearInterval(heroInterval);
+        startHeroTimer();
+      }
+
+      // -------------------------------------------------------------
+      // CHECKOUT FORM & MULTI-VARIANT SELECTOR LOGIC
+      // -------------------------------------------------------------
+      function renderVariantSelector() {
+        const container = document.getElementById("variants-container");
+
+        container.innerHTML = variants
+          .map((v) => {
+            const state = selectedState[v.id] || {
+              selected: false,
+              quantity: 1,
+            };
+            const isSelected = state.selected;
+
+            return `
+            <div class="flex-none w-36 sm:w-44 bg-white rounded-xl border-2 transition-all p-2 relative shadow-sm hover:shadow-md flex flex-col justify-between ${isSelected ? "border-zoaPrimary bg-pink-50/30" : "border-gray-200"}">
+                
+                <!-- Main Card Wrapper -->
+                <div class="w-full">
+                    <div class="relative w-full rounded-lg overflow-hidden mb-2 bg-gray-100">
+                        <img src="${v.img}" alt="${v.name}" class="w-full h-48 object-cover">
+                       
+                        <!-- Checkbox / Selection Button Badge -->
+                        <div class="absolute top-1.5 right-1 flex items-center justify-center">
+                            <button type="button" onclick="toggleVariantSelection(${v.id})" class="w-6 h-6 rounded-full border-2 border-zoaPrimary ${isSelected ? "bg-zoaPrimary" : "bg-white"} text-xs font-bold flex items-center justify-center transition-all ${isSelected ? "scale-105" : ""}">
+                                <i class="fa-solid ${isSelected ? "fa-check" : "fa-plus"} text-${isSelected ? "white" : "zoaPrimary"}"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Variant Name or Info can go here if needed -->
+                    <div class="text-xs font-semibold text-gray-800 mb-2 truncate">${v.name}</div>
+                </div>
+
+                <!-- Quantity Controller -->
+                <div class="flex items-center justify-center border border-gray-300 rounded-md bg-white overflow-hidden w-full mt-2">
+                    <button type="button" onclick="changeQty(${v.id}, -1)" class="px-2 py-1 text-xs text-gray-600 hover:bg-gray-100">-</button>
+                    <span class="px-3 py-1 text-xs font-bold text-gray-800">${state.quantity}</span>
+                    <button type="button" onclick="changeQty(${v.id}, 1)" class="px-2 py-1 text-xs text-gray-600 hover:bg-gray-100">+</button>
+                </div>
+
+            </div>
+        `;
+          })
+          .join("");
+
+        renderSelectedSummary();
+        calculateTotal();
+      }
+
+      function toggleVariantSelection(id) {
+        selectedState[id].selected = !selectedState[id].selected;
+        renderVariantSelector();
+      }
+
+      function changeQty(id, delta) {
+        const newQty = selectedState[id].quantity + delta;
+        if (newQty >= 1) {
+          selectedState[id].quantity = newQty;
+          // Only change quantity, don't auto-select variant
+          // (like Fashion Garden - quantity selection is independent)
+          renderVariantSelector();
+          calculateTotal();
+        }
+      }
+
+      function updateSize(id, sizeVal) {
+        selectedState[id].size = sizeVal;
+      }
+
+      // --- Variant Gallery Scroll Functions ---
+      function scrollVariants(direction) {
+        const container = document.getElementById("variants-container");
+        const scrollAmount = 300; // pixels to scroll
+        if (direction === -1) {
+          container.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+        } else {
+          container.scrollBy({ left: scrollAmount, behavior: "smooth" });
+        }
+      }
+
+      function scrollVariantGallery(direction) {
+        const container = document.getElementById("variants-container");
+        const scrollAmount = 300; // pixels to scroll
+        if (direction === -1) {
+          container.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+        } else {
+          container.scrollBy({ left: scrollAmount, behavior: "smooth" });
+        }
+      }
+
+      // Update scroll indicator text
+      function updateVariantScrollIndicator() {
+        const container = document.getElementById("variants-container");
+        const totalWidth = container.scrollWidth;
+        const visibleWidth = container.clientWidth;
+        const scrolled = container.scrollLeft;
+        const percentage = (scrolled / (totalWidth - visibleWidth)) * 100;
+        document.getElementById("variant-scroll-indicator").innerText =
+          `${Math.round(scrolled + 1)} of ${totalWidth - visibleWidth}px`;
+      }
+
+      // Run on initial load and after rendering
+      document.addEventListener(
+        "DOMContentLoaded",
+        updateVariantScrollIndicator,
+      );
+      document.addEventListener(
+        "variant:rendered",
+        updateVariantScrollIndicator,
+      );
+
+      function renderSelectedSummary() {
+        const summaryContainer = document.getElementById(
+          "selected-variants-summary",
+        );
+        const selectedList = variants.filter(
+          (v) => selectedState[v.id].selected,
+        );
+
+        if (selectedList.length === 0) {
+          summaryContainer.innerHTML = `
+                    <div class="p-4 text-center text-red-500 font-semibold text-xs bg-red-50 rounded-lg">
+                        ⚠️ দয়া করে অন্তত একটি ভ্যারিয়েন্ট/ডিজাইন নির্বাচন করুন!
+                    </div>
+                `;
+          return;
+        }
+
+        summaryContainer.innerHTML = selectedList
+          .map((v) => {
+            const state = selectedState[v.id];
+            return `
+                    <div class="flex items-center justify-between gap-3 bg-white p-2.5 rounded-lg border border-gray-200">
+                        <div class="flex items-center gap-3">
+                            <img src="${v.img}" alt="${v.name}" class="w-14 h-14 object-cover rounded-md border border-gray-200">
+                            <div>
+                                <h4 class="font-bold text-xs text-gray-800">${v.name}</h4>
+                                <span class="text-xs text-zoaSecondary font-bold">৳${PRODUCT_PRICE} × ${state.quantity}</span>
+                            </div>
+                        </div>
+
+                        <!-- Size Selector -->
+                        <div class="flex items-center gap-2">
+                            <label class="text-xs font-medium text-gray-600">সাইজ:</label>
+                            <select onchange="updateSize(${v.id}, this.value)" class="text-xs border border-gray-300 rounded px-2 py-1 bg-white font-bold text-zoaSecondary focus:outline-none">
+                                ${sizes
+                                  .map(
+                                    (s) => `
+                                    <option value="${s}" ${state.size === s ? "selected" : ""}>${s}</option>
+                                `,
+                                  )
+                                  .join("")}
+                            </select>
+                        </div>
+                    </div>
+                `;
+          })
+          .join("");
+      }
+
+      function calculateTotal() {
+        const selectedList = variants.filter(
+          (v) => selectedState[v.id].selected,
+        );
+
+        // Total Quantity & Subtotal
+        let totalQty = 0;
+        let subtotal = 0;
+
+        selectedList.forEach((v) => {
+          const qty = selectedState[v.id].quantity;
+          totalQty += qty;
+          subtotal += PRODUCT_PRICE * qty;
+        });
+
+        // Delivery Charge Logic based on District
+        const districtSelect = document.getElementById("customer-district");
+        const district = districtSelect.value;
+        let deliveryCharge = 0;
+
+        if (selectedList.length > 0) {
+          if (district === "Dhaka") {
+            deliveryCharge = 70; // Inside Dhaka
+          } else if (district !== "") {
+            deliveryCharge = 130; // Outside Dhaka
+          }
+        }
+
+        const grandTotal = subtotal + deliveryCharge;
+
+        // DOM Updates
+        document.getElementById("summary-total-qty").innerText = totalQty;
+        document.getElementById("summary-subtotal").innerText =
+          `৳${subtotal.toLocaleString("bn-BD")}`;
+        document.getElementById("summary-delivery").innerText =
+          deliveryCharge > 0 ? `৳${deliveryCharge}` : "জেলা নির্বাচন করুন";
+        document.getElementById("summary-grand-total").innerText =
+          `৳${grandTotal.toLocaleString("bn-BD")}`;
+        document.getElementById("btn-total-price").innerText =
+          grandTotal.toLocaleString("bn-BD");
+      }
+
+      // -------------------------------------------------------------
+      // ORDER SUBMISSION & LOCALSTORAGE PERSISTENCE
+      // -------------------------------------------------------------
+      function handleOrderSubmit(e) {
+        e.preventDefault();
+
+        const selectedList = variants.filter(
+          (v) => selectedState[v.id].selected,
+        );
+        if (selectedList.length === 0) {
+          alert("অনুগ্রহ করে অন্তত একটি পোশাক সিলেক্ট করুন!");
+          return;
+        }
+
+        const name = document.getElementById("customer-name").value;
+        const phone = document.getElementById("customer-phone").value;
+        const district = document.getElementById("customer-district").value;
+        const address = document.getElementById("customer-address").value;
+
+        const itemsOrdered = selectedList.map((v) => ({
+          id: v.id,
+          name: v.name,
+          img: v.img,
+          quantity: selectedState[v.id].quantity,
+          size: selectedState[v.id].size,
+          price: PRODUCT_PRICE,
+        }));
+
+        let subtotal = 0;
+        itemsOrdered.forEach((i) => (subtotal += i.price * i.quantity));
+        const deliveryCharge = district === "Dhaka" ? 70 : 130;
+        const grandTotal = subtotal + deliveryCharge;
+
+        const order = {
+          orderId: "ZOA-" + Math.floor(100000 + Math.random() * 900000),
+          date: new Date().toLocaleDateString("bn-BD"),
+          customer: { name, phone, district, address },
+          items: itemsOrdered,
+          subtotal,
+          deliveryCharge,
+          grandTotal,
+        };
+
+        // Save to LocalStorage
+        let existingOrders = JSON.parse(
+          localStorage.getItem("zoa_orders") || "[]",
+        );
+        existingOrders.push(order);
+        localStorage.setItem("zoa_orders", JSON.stringify(existingOrders));
+
+        updateSavedOrdersBadge();
+
+        // Success feedback
+        alert(
+          `🎉 আপনার অর্ডারটি সফলভাবে গৃহিত হয়েছে!\nঅর্ডার নম্বর: ${order.orderId}\nসর্বমোট মূল্য: ৳${order.grandTotal}`,
+        );
+
+        // Reset Form State
+        document.getElementById("checkout-form").reset();
+        // Reset selected items
+        variants.forEach((v) => {
+          selectedState[v.id] = {
+            selected: v.id === 1,
+            quantity: 1,
+            size: "38",
+          };
+        });
+        renderVariantSelector();
+      }
+
+      function updateSavedOrdersBadge() {
+        const existingOrders = JSON.parse(
+          localStorage.getItem("zoa_orders") || "[]",
+        );
+        const badge = document.getElementById("saved-orders-badge");
+        badge.innerText = existingOrders.length;
+      }
+
+      function toggleOrdersModal() {
+        const modal = document.getElementById("orders-modal");
+        modal.classList.toggle("hidden");
+
+        if (!modal.classList.contains("hidden")) {
+          renderModalOrders();
+        }
+      }
+
+      function renderModalOrders() {
+        const container = document.getElementById("modal-orders-list");
+        const orders = JSON.parse(localStorage.getItem("zoa_orders") || "[]");
+
+        if (orders.length === 0) {
+          container.innerHTML = `
+                    <div class="text-center py-8 text-gray-500">
+                        <i class="fa-solid fa-box-open text-4xl text-gray-300 mb-2"></i>
+                        <p>এখনো কোনো অর্ডার সেভ করা হয়নি।</p>
+                    </div>
+                `;
+          return;
+        }
+
+        container.innerHTML = orders
+          .map(
+            (order) => `
+                <div class="p-4 bg-gray-50 rounded-xl border border-gray-200 space-y-3">
+                    <div class="flex justify-between items-center border-b pb-2">
+                        <div>
+                            <span class="font-bold text-zoaPrimary">${order.orderId}</span>
+                            <span class="text-[10px] text-gray-400 block">${order.date}</span>
+                        </div>
+                        <span class="bg-emerald-100 text-zoaSecondary text-[10px] px-2 py-0.5 rounded font-bold">অর্ডার কনফার্মড</span>
+                    </div>
+
+                    <div class="space-y-2">
+                        ${order.items
+                          .map(
+                            (item) => `
+                            <div class="flex items-center gap-2">
+                                <img src="${item.img}" class="w-8 h-8 rounded object-cover border">
+                                <div class="flex-grow">
+                                    <span class="font-semibold block text-gray-800">${item.name}</span>
+                                    <span class="text-[10px] text-gray-500">সাইজ: ${item.size} | পরিমণ: ${item.quantity}টি</span>
+                                </div>
+                                <span class="font-bold text-gray-700">৳${item.price * item.quantity}</span>
+                            </div>
+                        `,
+                          )
+                          .join("")}
+                    </div>
+
+                    <div class="pt-2 border-t border-gray-200 text-right font-bold text-zoaDark flex justify-between">
+                        <span class="text-gray-500 font-normal">কাস্টমার: ${order.customer.name}</span>
+                        <span>সর্বমোট: ৳${order.grandTotal}</span>
+                    </div>
+                </div>
+            `,
+          )
+          .reverse()
+          .join("");
+      }
+
+      // -------------------------------------------------------------
+      // INITIALIZATION ON PAGE LOAD
+      // -------------------------------------------------------------
+      window.onload = function () {
+        initHeroCarousel();
+        renderVariantSelector();
+        updateSavedOrdersBadge();
+      };
+    </script>
+  </body>
+</html>
